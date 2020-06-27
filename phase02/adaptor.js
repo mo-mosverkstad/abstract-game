@@ -43,7 +43,7 @@ function circle(x, y, radius, color) {
 
 function rectangle(x, y, width, height, color) {
     var ctx = myGameArea.context;
-    myGameArea.context.fillStyle = "blue";
+    myGameArea.context.fillStyle = color;
     ctx.fillRect(x, y, width, height);
 }
 
