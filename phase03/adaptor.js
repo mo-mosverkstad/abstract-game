@@ -1,5 +1,6 @@
 var myGameArea = {
     canvas : document.createElement("canvas"),
+    refresh: true,
     start : function() {
         this.canvas.width = 400;// painspace definition
         this.canvas.height = 400;// painspace definition
@@ -18,13 +19,10 @@ var myGameArea = {
     }
 }
 
-function startGame() {
-	myGameArea.start();
-    initialize();
-}
+myGameArea.start();
 
 function updateGameArea() {
-    if (true) {
+    if (myGameArea.refresh) {
         myGameArea.clear();
         myGameArea.fill();
     }
