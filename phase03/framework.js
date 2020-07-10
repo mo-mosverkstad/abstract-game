@@ -12,6 +12,8 @@ var effectBounce = 1;
 var drawingFunction = [circle, rectangle, triangle];
 var argumentsNumber = [4, 4, 6];
 
+// need to make a format and is touched function
+
 class Widget{
     constructor(positions, shape, color){
         this.positions = positions;
@@ -79,6 +81,24 @@ class Widget{
                 this.vector[1] = (this.vector[1] + (Math.PI/4 - (this.vector[1] % (Math.PI/4))) * 2) % (Math.PI * 2);
                 break;
             }
+        }
+    }
+    
+    getPositions(){
+        return merge(this.xPositions, this.yPositions);
+    }
+    
+    isTouched(x, y){
+        var rect = this.toRect();
+        var x1 = rect[0];
+        var y1 = rect[1];
+        var x2 = rect[2];
+        var y2 = rect[3];
+        if (x1 < x && x < x2 && y1 < y && y < y2){
+            return true;
+        }
+        else {
+            return false;
         }
     }
     
