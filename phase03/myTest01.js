@@ -12,3 +12,15 @@ function update() {
     c.move();
     c.borderEffect(effectBounce);
 }
+
+function mouseMove(x, y) {
+    console.log(x, y);
+}
+
+function mouseClick(x, y) {
+    console.log(x, y);
+}
+
+function keyDown(keyCode) {
+    console.log(keyCode);
+}

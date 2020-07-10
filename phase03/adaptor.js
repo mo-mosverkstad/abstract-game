@@ -19,7 +19,24 @@ var myGameArea = {
     }
 }
 
+function getMouseMove(evt) {
+    var rect = myGameArea.canvas.getBoundingClientRect();
+    mouseMove(evt.clientX - rect.left, evt.clientY - rect.top);
+}
+
+function getMouseClick(evt) {
+    var rect = myGameArea.canvas.getBoundingClientRect();
+    mouseClick(evt.clientX - rect.left, evt.clientY - rect.top);
+}
+
+function getKeyDown(evt) {
+    keyDown(evt.keyCode);
+}
+
 myGameArea.start();
+myGameArea.canvas.addEventListener('mousemove', getMouseMove, false);
+myGameArea.canvas.addEventListener('click', getMouseClick, false);
+window.addEventListener('keydown', getKeyDown, false);
 
 function updateGameArea() {
     if (myGameArea.refresh) {
