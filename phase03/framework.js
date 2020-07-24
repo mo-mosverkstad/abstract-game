@@ -18,6 +18,7 @@ class Move {
         this.xPositions = xPositions;
         this.yPositions = yPositions;
         this.vector = vector;
+        this.vectorOld = vector;
         this.spaceWidth = space[0];
         this.spaceHeight = space[1];
         this.borderEffect = borderEffect;
@@ -74,7 +75,11 @@ class Move {
                 break;
         }
     }
-
+    
+    stop() {
+        this.vectorOld = this.vector;
+        this.vector = [0, 0];
+    }
 }
 
 class Widget{
