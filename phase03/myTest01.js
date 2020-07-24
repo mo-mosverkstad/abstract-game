@@ -1,49 +1,57 @@
 //myGameArea.refresh = false;
 
-c = new Widget([100, 100, 200, 200], ShapeRectangle, "green");
-//c.vector = [10, Math.PI/4];
-//console.log(c.toRect());
-var a = merge([1, 3, 5, 7], [2, 4, 6, 8])
-console.log(a);
-c.draw();
-console.log(c.isTouched(100, 100));
+/* data section */
+var space = [400, 400];
+
+var avatar_data = {x: space[0]/2, y: space[1]/2, width: 30, height: 10, type: ShapeCircle, effect: effectNone};
+
+var balls_data = [
+    {position: [100, 100, 150, 150], type: ShapeCircle, color: "yellow", vector: [15, Math.PI/3], effect: effectBounce},
+    {position: [100, 100, 150, 150], type: ShapeCircle, color: "red",    vector: [15, Math.PI/5], effect: effectBounce},
+    {position: [100, 100, 150, 150], type: ShapeCircle, color: "blue",   vector: [15, Math.PI/7], effect: effectBounce},
+];
+
+/* coding section */
+var balls = [];
+for (var data of balls_data) {
+    var b = new Widget(data.position, data.type, data.color);
+    b.setMove(data.vector, space, data.effect);
+    balls.push(b);
+}
+
+function getAvatarRect(x, y) {
+    return [x-avatar_data.width/2, y-avatar_data.height/2,
+            x+avatar_data.width/2, y+avatar_data.height/2];
+}
+
+var avatar = new Widget(getAvatarRect(avatar_data.x, avatar_data.y),
+                        avatar_data.type,
+                        avatar_data.effect);
+
+
 
 function update() {
-    c.draw();
-    //c.move();
-    //c.borderEffect(effectBounce);
-    //console.log(c.getPositions());
-    place = c.getPositions();
-    if (JSON.stringify(place) === JSON.stringify([200, 100, 300, 200])){
-        console.log("reach point");
-        c.xPositions[0] = 82;
+    for (var b of balls) {
+        b.move();
+        b.draw();
     }
+    avatar.draw();
+
 }
 
 // sensor
 function mouseMove(x, y) {
-    //console.log(x, y);
+    console.log(x, y);
+    var rect = getAvatarRect(x, y);
+    avatar.xPositions = [rect[0], rect[2]];
+    avatar.yPositions = [rect[1], rect[3]];
 }
 
 function mouseClick(x, y) {
-    console.log(x, y);
-    if (c.isTouched(x, y)){
-        c.xPositions = [200, 400];
-        c.yPositions = [300, 400];
-    }
+
 }
 
 function keyDown(keyCode) {
-    console.log(keyCode);
-    if (keyCode == K_LEFT){
-        c.vector = [-1, 0];
-        c.move();
-        //console.log(c.getPositions());
-    }
-    else if (keyCode == K_RIGHT){
-        c.vector = [1, 0];
-        c.move();
-        //console.log(c.getPositions());
-    }
+
     
 }
